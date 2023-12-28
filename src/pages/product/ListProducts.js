@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getAll} from "../../redux/service/productService";
+import {getAll, remove} from "../../redux/service/productService";
 import {Link} from "react-router-dom";
 
 export function ListProducts() {
@@ -11,6 +11,9 @@ export function ListProducts() {
     useEffect(() => {
         dispatch(getAll())
     },[])
+    const removeProduct = (id) => {
+        dispatch(remove(id))
+    }
     return (
         <>
             <table border={1}>
@@ -37,7 +40,9 @@ export function ListProducts() {
                                        <button>Sửa</button></Link>
                                </td>
                                 <td>
-                                    <button>Xóa</button>
+                                    <button onClick={()=>{
+                                        removeProduct(product.id)
+                                    }}>Xóa</button>
                                 </td>
 
                             </tr>

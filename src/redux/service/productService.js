@@ -29,3 +29,10 @@ export const Update = createAsyncThunk(
         return res.data
     }
 )
+export const remove = createAsyncThunk(
+    'products/delete',
+     async (id)=>{
+       await axios.delete("http://localhost:3000/products/" +id)
+        return id
+    }
+)

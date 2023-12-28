@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {add, getAll, Update, updateForm} from "../service/productService";
+import {add, getAll, remove, Update, updateForm} from "../service/productService";
 import {get} from "axios";
 
 const initialState = {
@@ -25,6 +25,13 @@ const productSlice = createSlice({
             for (let i = 0; i < state.list.length; i++) {
                 if (state.list[i].id === payload.id) {
                     state.list[i] = payload
+                }
+            }
+        })
+        builder.addCase(remove.fulfilled, (state, {payload}) => {
+            for (let i = 0; i < state.list.length; i++) {
+                if (state.list[i].id === payload) {
+                    state.list.splice(i, 1)
                 }
             }
         })
